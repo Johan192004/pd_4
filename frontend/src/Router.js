@@ -3,6 +3,7 @@ import { viewDashboard } from "./views/private/dashboard.js"
 import { viewRegisterUser } from "./views/public/registerUser.js"
 import { viewNotFound } from "./views/public/not-found.js"
 import { viewWelcome } from "./views/public/welcome.js"
+import { viewClients } from "./views/private/dashboard/clients.js"
 
 
 export function routesFunction(url){
@@ -15,6 +16,8 @@ export function routesFunction(url){
             return viewRegisterUser;
         case "#/dashboard":
             return viewDashboard;
+        case "#/dashboard/clients":
+            return viewClients;
         case "#/notFound":
             return viewNotFound;
         default:

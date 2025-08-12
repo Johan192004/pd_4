@@ -63,8 +63,8 @@ export async function deleteClient(id) {
     return res
 }
 
-export async function putPatient(nameP,addressP,phone_numberP,emailP){
-    let res = await fetch(`${URL_DB}/patients/${idP}`,{
+export async function putClient(idP,nameP,addressP,phone_numberP,emailP){
+    let res = await fetch(`${URL_DB}/clients/${idP}`,{
         "method":"PUT",
         "headers":{
             "Content-Type":"application/json"

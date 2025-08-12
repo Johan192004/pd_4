@@ -35,26 +35,76 @@ router.post('/',async(req,res)=>{
     try {
 
 
-        const { name,email } = req.body
+        const { document,name,address,phone_number,email } = req.body
 
-        let result = await db.query('INSERT INTO patients(name,email) VALUES (?,?);',[name,email])
+        let result = await db.query('INSERT INTO clients(document,name,address,phone_number,email) VALUES (?,?,?,?,?);',[document,name,address,phone_number,email])
         
         res.status(201).json({
-            message: 'paciente creado correctamente',
-            doctor: result.rows[0]
+            message: 'Cliente creado correctamente',
+            client: result[0]
         })
 
         console.log(result)
 
     } catch (error){
         if (error.code === 'ER_DUP_ENTRY') {
-            res.status(409).json({ error: 'El email ya está registrado',
+            res.status(409).json({ error: 'Hay un campo repetido ya existente',
                 status:409
              });
         } else {
             
             res.status(500).json({ error: 'Error interno del servidor' }); // 500 Internal Server Error
         }
+    }
+
+})
+
+router.delete('/:id',async(req,res)=>{
+
+    try {
+        const id = req.params.id
+        let result = await db.query('DELETE FROM clients WHERE document=?',[id])
+        const affectedRows = result[0].affectedRows;
+        if (affectedRows === 0) {
+            return res.status(404).json({ error: 'Cliente no encontrado' });
+        }
+        res.status(204).send();
+    } catch (error) {
+
+        console.error('Error al eliminar el cliente:', error);
+        res.status(500).json({ error: 'Error del servidor' });
+    }
+
+})
+
+router.put('/:id',async(req,res)=>{
+
+    try {
+
+        const id = req.params.id
+        const { name,address,phone_number,email } = req.body
+
+        let result = await db.query('UPDATE clients SET name=?,address=?,phone_number=?,email=? WHERE document=?;',[name,address,phone_number,email,id])
+        
+        const affectedRows = result[0].affectedRows;
+
+        if (affectedRows === 0) {
+            return res.status(404).json({ error: 'Cliente no encontrado' });
+        }
+        res.status(200).json({ message: 'Cliente actualizado correctamente' });
+
+
+    } catch (error){
+        console.error("Error al actualizar cliente",error)
+
+        if (error.code === 'ER_DUP_ENTRY') {
+            return res.status(409).json({ error: 'Email ya está en uso',
+                status : 409
+             });
+        }
+
+        
+        res.status(500).json({error:'Error interno del servidor'})
     }
 
 })

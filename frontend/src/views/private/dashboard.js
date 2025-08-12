@@ -24,7 +24,7 @@ export function viewDashboard(){
                 <div class="d-flex justify-content-start flex-grow-1">
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <a href="/patients" class="text-decoration-none" id="buttonClients" data-link>Clientes</a>
+                            <a href="/clients" class="text-decoration-none" id="buttonClients" data-link>Clientes</a>
                         </li>
                         <li class="list-group-item">
                             <a class="btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -76,7 +76,9 @@ async function buttonClients() {
     document.getElementById('buttonClients').addEventListener('click',(e)=>{
         e.preventDefault()
         let path = e.target.getAttribute("href")
+
         window.location.hash = "#/dashboard" + path
+        
 
     })
 }
