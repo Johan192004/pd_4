@@ -3,6 +3,7 @@ const dotenv = require('dotenv')
 dotenv.config()
 const cors = require('cors')
 const clientsRoutes = require('./routes/clients.routes')
+const usersRoutes = require('./routes/users.routes')
 
 
 const app = express()
@@ -10,6 +11,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 app.use('/clients',clientsRoutes)
+app.use('/users',usersRoutes)
 
 
 const EXPRESS_PORT = process.env.EXPRESS_PORT || 3000

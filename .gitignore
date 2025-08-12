@@ -1,2 +1,5 @@
 load_csv/node_modules/
 load_csv/.env
+.env
+backend/node_modules/
+backend/.env
