@@ -26,19 +26,6 @@ export function viewDashboard(){
                         <li class="list-group-item">
                             <a href="/clients" class="text-decoration-none" id="buttonClients" data-link>Clientes</a>
                         </li>
-                        <li class="list-group-item">
-                            <a class="btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Reportes
-                            </a>
-                        
-                            <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/reports/appointments" id="buttonReportsAppointments">Citas</a></li>
-                            <li><a class="dropdown-item" href="/reports/appointments/doctor" id="buttonReportsAppointmentsDoctors">Filtrar citas por medico y rango de fechas</a></li>
-                            <li><a class="dropdown-item" href="/reports/appointments/patient" id="buttonReportsAppointmentsPatients">Obtener pacientes con mas de 3 citas registradas</a></li>
-                            <li><a class="dropdown-item" href="/reports/appointments/doctors" id="buttonReportsAppointmentsDoctors2">Listar medicos con el numero de citas atendidas en el ultimo mes</a></li>
-                            <li><a class="dropdown-item" href="#">Consultar ingresos generados por metodo de pago en un rango de fechas</a></li>
-                            </ul>
-                            </li>
                     </ul>
                 </div>
             </aside>

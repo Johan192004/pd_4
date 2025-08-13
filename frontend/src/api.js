@@ -57,9 +57,6 @@ export async function deleteClient(id) {
             "Content-Type":"application/json"
         }
     })
-    // if (res.status === 204) {
-    // return { status: 204, message: "Paciente eliminado exitosamente" };
-    // }
     return res
 }
 

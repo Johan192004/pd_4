@@ -5,7 +5,7 @@ import { viewNotFound } from "./views/public/not-found.js"
 import { viewWelcome } from "./views/public/welcome.js"
 import { viewClients } from "./views/private/dashboard/clients.js"
 
-
+//Function that returns the wished view, otherwise it will be not found in case it doesn't exist
 export function routesFunction(url){
     switch (url){
         case "":

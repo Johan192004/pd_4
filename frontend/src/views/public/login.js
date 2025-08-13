@@ -73,6 +73,12 @@ function verifyLogin(){
 }
 
 function scriptLogin(){
+    if(window.sessionStorage.getItem("auth")=="true"){
+
+        window.location.hash = "#/dashboard"
+
+    }
+
     verifyLogin()
 
     const aRegisterUser = document.getElementById("linkRegisterUser")

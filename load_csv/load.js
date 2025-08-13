@@ -5,15 +5,9 @@ require('dotenv').config()
 
 
 
-async function loadData() {
-    const client = await mysql.createConnection({
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-})
-    await client.connect()
+async function loadData(client) {
+    
+
     return new Promise((resolve,reject)=>{
         const rows = []
     fs.createReadStream('data.csv').pipe(csv({
@@ -54,7 +48,7 @@ async function loadData() {
 
                 let currentBillId = row.id_bill.trim()
 
-                //It will enter the conditional if the id of the bill (bill_number) has not registered yet
+                //It will enter the conditional if the id of the bill has not been registered yet
                 if(!setBills.has(currentBillId)){
                     setBills.add(currentBillId)
 
@@ -68,6 +62,8 @@ async function loadData() {
                 /*TRANSACTIONS*/
 
                 let currentTransactionId = row.id_transaction.trim()
+
+                //It will enter the conditional if the id of the transaction has not been registered yet
 
                 if(!setTransactions.has(currentTransactionId)){
                     setTransactions.add(currentTransactionId)
@@ -87,7 +83,7 @@ async function loadData() {
 
             }
 
-            await client.end()
+            console.log("All good with data.csv")
             resolve()
 
         } catch (error) {
@@ -101,9 +97,64 @@ async function loadData() {
     
 }
 
+async function loadUsers(client) {
+    
+    return new Promise((resolve,reject)=>{
+        const rows = []
+    fs.createReadStream('users.csv').pipe(csv({
+        separator: ';',
+        mapHeaders: ({ header }) => header.trim()
+      })).on('data',(data)=>{
+        rows.push(data)
+      }).on('end',async()=>{
+        try{
+
+            const emailsSet = new Set()
+
+            for(const row of rows){
+
+                const email = row.email
+
+                if(!emailsSet.has(email)){
+                    const name = row.name
+                    const password = row.password
+                    const result = client.query("INSERT INTO users(name,email,password) VALUES(?,?,?)",[name,email,password])
+    
+                }
+
+
+
+            }
+
+            console.log("All good with users")
+            resolve()
+        }catch (error) {
+            await client.end()
+            reject(error)
+        }
+      })
+    })
+    
+
+    
+}
+
 async function main(){
+
     try {
-        await loadData()
+        const client = await mysql.createConnection({
+            host: process.env.DB_HOST,
+            port: process.env.DB_PORT,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            database: process.env.DB_NAME,
+        })
+
+        await client.connect()
+        await loadData(client)
+        await loadUsers(client)
+        await client.end()
+        console.log("Datos ingresados desde csv correctamente")
     } catch (error) {
         console.error(error)
     }
