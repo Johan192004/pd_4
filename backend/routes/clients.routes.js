@@ -44,8 +44,6 @@ router.post('/',async(req,res)=>{
             client: result[0]
         })
 
-        console.log(result)
-
     } catch (error){
         if (error.code === 'ER_DUP_ENTRY') {
             res.status(409).json({ error: 'Hay un campo repetido ya existente',
