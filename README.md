@@ -85,13 +85,9 @@
 | DELETE | `/clients/:id`        |
 
 ### Andvanced querries
-- `/api/citas/filtrar?medico={id}&desde={fecha}&hasta={fecha}`
-- `/api/pacientes/frecuentes`
-- `/api/medicos/citas-mes`
-- `/api/ingresos?desde={fecha}&hasta={fecha}`
 
----
-### Total paid for each client.
+
+#### Total paid for each client.
 - Endpoint: `/reports/first`
 - Obtains objects with the following structure:
 ```bash
@@ -102,7 +98,7 @@
     }
 ```
 
-### Pending bills with client's info and the asosiated transaction..
+#### Pending bills with client's info and the asosiated transaction..
 - Endpoint: `/reports/second`
 - Obtains objects with the following structure:
 ```bash
@@ -122,7 +118,7 @@
     }
 ```
 
-### List of transactions for each platform..
+#### List of transactions for each platform..
 - Endpoint: `/reports/third`
 - You have add a header, where the key is `Content-Type` and the value `application/json`
 - In the body, you put the kind of platform you'd like to filter:
@@ -135,16 +131,16 @@
 ```bash
     {
         "transaction_id": "TXN001",
-        "general_date": "2024-06-01T15:00:00.000Z",
-        "amount_sent": 38940,
+        "general_date": "2024-06-01T15:00:00.000Z",     //date of the transaction
+        "amount_sent": 38940,       //amount sent in the transaction
         "transaction_state": "Pendiente",
-        "kind": "Pago de Factura",
-        "platform": "Nequi",
-        "document": 149186547,
-        "name": "Angel Daniel",
+        "kind": "Pago de Factura",      //kind of transaction
+        "platform": "Nequi",       //platform filtered
+        "document": 149186547,      //document of the client
+        "name": "Angel Daniel",     //name of the client
         "id_bill": "FAC7068",
-        "total_amount": 39940,
-        "paid_amount": 0
+        "total_amount": 39940,      //total amount of the bill
+        "paid_amount": 0            //paid amount of the bill
     }
 ```
 
