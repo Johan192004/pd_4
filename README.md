@@ -151,6 +151,10 @@
 
 ---
 
+## Credential to log in
+- email: `johan2@gmail.com`
+- password: `password`
+
 ## Authors info
 
 - **Name:** Johan Ramirez Marin
