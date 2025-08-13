@@ -44,9 +44,7 @@ export function viewDashboard(){
 
 async function scriptDashboard(){
     logOut()
-
     buttonClients()
-
 }
 
 async function logOut() {
@@ -65,8 +63,6 @@ async function buttonClients() {
         let path = e.target.getAttribute("href")
 
         window.location.hash = "#/dashboard" + path
-        
-
     })
 }
 

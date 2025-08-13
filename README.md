@@ -33,7 +33,7 @@
 
 ## Installation and execution
 
-1. **Clonar el repositorio**
+1. **Clone the repository**
    ```bash
    git clone https://github.com/Johan192004/pd_4.git
    ```

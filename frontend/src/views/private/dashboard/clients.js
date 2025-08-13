@@ -1,4 +1,3 @@
-// import { deletePatient, getPatients, postPatient, putPatient} from "../../../Router.js"
 import { viewDashboard } from "../dashboard.js"
 import { getClients,deleteClient,postClient,putClient } from "../../../api.js"
 
@@ -12,52 +11,6 @@ export function viewClients(){
 
     }
 }
-
-/*<div class="col-md-9 mt-4">
-                <div class="card">
-                    <div class="card-body">
-                        <a href="" class="btn btn-primary">Crear nuevo usuario</a>
-                        <div class="table-responsive mt-3">
-                            <table class="table table-hover table-border">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nombres</th>
-                                        <th>Apellidos</th>
-                                        <th>Correo</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Robinson</td>
-                                        <td>Cortes</td>
-                                        <td>robinson@riwi.io</td>
-                                        <td>
-                                            <a href="" class="btn btn-sm btn-info">Detalles</a>
-                                            <a href="" class="btn btn-sm btn-warning">Editar</a>
-                                            <a href="" class="btn btn-sm btn-danger">Eliminar</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Robinson</td>
-                                        <td>Cortes</td>
-                                        <td>robinson@riwi.io</td>
-                                        <td>
-                                            <a href="" class="btn btn-sm btn-info">Detalles</a>
-                                            <a href="" class="btn btn-sm btn-warning">Editar</a>
-                                            <a href="" class="btn btn-sm btn-danger">Eliminar</a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div> */
-
 
 async function viewComplete(){
     console.log("Entre al view patients")
@@ -201,13 +154,18 @@ async function newFunction() {
             console.log("Hubo un valor repetido")
 
         } else {
-            const result = await postClient(documentNumber,nameValue,addressValue,phoneNumberValue,emailValue)
-            if(result.status == 409){
-                alert("El valor de documento o email ya estan en uso")
+            if(documentNumber < 0){
+                alert("El documento tiene que ser positivo")
             } else {
-                alert("Se ha registrado exitosamente el nuevo cliente")
-                viewComplete()
+                const result = await postClient(documentNumber,nameValue,addressValue,phoneNumberValue,emailValue)
+                if(result.status == 409){
+                    alert("El valor de documento o email ya estan en uso")
+                } else {
+                    alert("Se ha registrado exitosamente el nuevo cliente")
+                    viewComplete()
+                }
             }
+            
         }
 
         
